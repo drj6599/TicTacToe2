@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Board implements Prototype<Board>{
     private int dimension;
     private List<List<Cell>> matrix;
 
@@ -24,7 +24,7 @@ public class Board {
         for (int i = 0; i < dimension; i++) {
             this.matrix.add(new ArrayList<>());
             for (int j = 0; j < dimension; j++) {
-                this.matrix.get(i).add(new Cell(board.matrix.get(i).get(j)));
+                this.matrix.get(i).add(board.matrix.get(i).get(j).clone());
             }
         }
     }

@@ -1,6 +1,6 @@
 package model;
 
-public class Cell {
+public class Cell implements Prototype<Cell>{
     private int row;
     private int col;
     private CellState cellState;
@@ -58,5 +58,10 @@ public class Cell {
         }else {
             System.out.print("|"+ player.getSymbol() +"|");
         }
+    }
+
+    @Override
+    public Cell clone() {
+        return new Cell(this);
     }
 }
