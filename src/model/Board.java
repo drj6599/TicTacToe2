@@ -18,6 +18,20 @@ public class Board {
         }
     }
 
+    public Board(Board board) {
+        this.dimension = board.dimension;
+        this.matrix = new ArrayList<>();
+        for (int i = 0; i < dimension; i++) {
+            this.matrix.add(new ArrayList<>());
+            for (int j = 0; j < dimension; j++) {
+                this.matrix.get(i).add(new Cell(board.matrix.get(i).get(j)));
+            }
+        }
+    }
+
+    public Board clone(){
+        return new Board(this);
+    }
     public List<List<Cell>> getMatrix() {
         return matrix;
     }

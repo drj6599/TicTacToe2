@@ -16,6 +16,17 @@ public class GameController {
                 .build();
     }
 
+    public void saveBoardState(Game game){
+        game.getBoardStates().add(game.getCurrentBoard().clone());
+    }
+
+    public void displayGameReplay(Game game){
+        List<Board> boards = game.getBoardStates();
+        for(Board board : boards){
+            board.displayBoard();
+            System.out.println();
+        }
+    }
     public void displayBoard(Game game) {
         game.getCurrentBoard().displayBoard();
     }
@@ -30,6 +41,26 @@ public class GameController {
 
     public Player checkWinner(Game game,Move lastMovePlayed) {
         return game.getWinningStrategy().checkWinner(game.getCurrentBoard(),lastMovePlayed);
+    }
+
+    public boolean checkDraw(Game game)
+    {
+        List<List<Cell>> matrix = game.getCurrentBoard().getMatrix();
+        int countOfEmptyCells = 0;
+        for (int i = 0; i < matrix.size(); i++) {
+            for (int j = 0; j < matrix.size(); j++) {
+                if(matrix.get(i).get(j).getCellState() == CellState.EMPTY)
+                {
+                    countOfEmptyCells++;
+                }
+            }
+        }
+        if(countOfEmptyCells == 0)
+        {
+            game.setGameStatus(GameStatus.DRAW);
+            return true;
+        }
+        return false;
     }
 
     public Board undoMove(Game game , Move lastMovePlayed) {

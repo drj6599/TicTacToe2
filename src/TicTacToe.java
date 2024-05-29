@@ -43,14 +43,23 @@ public class TicTacToe {
                 System.out.println("It's " + players.get(playerIndex).getName() +"'s turn");
                 Move movePlayed = gameController.executeMove(game, players.get(playerIndex));
                 Player winner = gameController.checkWinner(game, movePlayed);
+                gameController.saveBoardState(game);
                 if (winner != null) {
                     game.setGameStatus(GameStatus.FINISHED);
                     System.out.println("Winner is : " + winner.getName());
                     break;
                 }
+                if(gameController.checkDraw(game)){
+                    break;
+                }
             }
             System.out.println("Final Board Status : ");
             gameController.displayBoard(game);
+            System.out.println("Do you wish to watch a replay of the Game? Y or N");
+            String gameReplayAns = sc.next();
+            if(gameReplayAns.equalsIgnoreCase("Y")){
+                gameController.displayGameReplay(game);
+            }
             System.out.println("Do you want to replay the game ? Y or N");
             replayAns = sc.next();
         }while(replayAns.equalsIgnoreCase("Y"));

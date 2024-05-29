@@ -64,6 +64,7 @@ public class OrderOneWinningStrategy implements WinningStrategy{
     }
     private boolean updateDiagonal(char symbol,HashMap<Character,Integer> map){
         int count = map.getOrDefault(symbol,0)+1;
+        map.put(symbol,count);
         return count == dimension;
     }
 }
