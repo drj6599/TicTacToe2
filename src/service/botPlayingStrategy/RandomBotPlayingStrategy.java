@@ -10,7 +10,6 @@ public class RandomBotPlayingStrategy implements BotPlayingStrategy{
 
         @Override
         public Move makeMove( Board board , Player bot) {
-            System.out.println("It's ROBOT's turn");
             Random random = new Random();
             while(true){
                 int row = random.nextInt(board.getDimension());

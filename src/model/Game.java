@@ -34,7 +34,7 @@ public class Game {
         this.noOfSymbols = players.size();
     }
 
-    public Builder builder(){
+    public static Builder builder(){
         return new Builder();
     }
 
@@ -112,14 +112,8 @@ public class Game {
 
     public static class Builder{
         private int dimension;
-        private Board currentBoard;
         private List<Player> players;
         private WinningStrategy winningStrategy;
-
-        public Builder setCurrentBoard(Board currentBoard) {
-            this.currentBoard = currentBoard;
-            return this;
-        }
 
         public Builder setPlayers(List<Player> players) {
             this.players = players;
@@ -139,7 +133,7 @@ public class Game {
         }
 
         private void validateNumberOfPlayers() {
-            if(players.size() < currentBoard.getDimension()-2 || players.size() >= currentBoard.getDimension()){
+            if(players.size() < dimension-2 || players.size() >= dimension){
                 throw new InvalidPlayerSizeException("Number of Players should be N-1 or N-2 as per the board size");
             }
         }
