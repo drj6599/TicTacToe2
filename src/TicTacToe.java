@@ -13,6 +13,7 @@ public class TicTacToe {
         Scanner sc = new Scanner(System.in);
         do {
             int id = 1;
+            int numberOfMoves = 0;
             GameController gameController = new GameController();
             List<Player> players = new ArrayList<>();
             System.out.println("Welcome to TicTacToe");
@@ -53,13 +54,16 @@ public class TicTacToe {
                 if(gameController.checkDraw(game)){
                     break;
                 }
-//                System.out.println(players.get(playerIndex) + " do you wish to undo your previous move ? Y or N");
-//                String undoAns = sc.next();
-//                if (undoAns.equalsIgnoreCase("Y"))
-//                {
-//                    gameController.undoMove(game,movePlayed);
-//                    playerIndex--;
-//                }
+                numberOfMoves++;
+                if(players.get(playerIndex).getPlayerType().equals(PlayerType.HUMAN) && numberOfMoves > 1){
+                    System.out.println(players.get(playerIndex).getName() + " do you wish to undo your previous move ? Y or N");
+                    String undoAns = sc.next();
+                    if (undoAns.equalsIgnoreCase("Y")) {
+                        gameController.undoMove(game, movePlayed);
+                        playerIndex--;
+                        numberOfMoves--;
+                    }
+                }
             }
             System.out.println("Final Board Status : ");
             gameController.displayBoard(game);

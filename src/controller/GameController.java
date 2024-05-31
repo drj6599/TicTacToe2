@@ -73,7 +73,15 @@ public class GameController {
         return false;
     }
 
-    public Board undoMove(Game game , Move lastMovePlayed) {
-        return null;
+    public void undoMove(Game game , Move lastMovePlayed) {
+        int row = lastMovePlayed.getCell().getRow();
+        int col = lastMovePlayed.getCell().getCol();
+        char symbol = lastMovePlayed.getPlayer().getSymbol();
+        lastMovePlayed.getCell().setPlayer(null);
+        lastMovePlayed.getCell().setCellState(CellState.EMPTY);
+        game.getMoves().removeLast();
+        game.getBoardStates().removeLast();
+        game.setCurrentBoard(game.getBoardStates().getLast().clone());
+        game.getWinningStrategy().undoLastMove(row,col,symbol);
     }
 }

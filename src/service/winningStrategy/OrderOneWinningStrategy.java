@@ -67,4 +67,27 @@ public class OrderOneWinningStrategy implements WinningStrategy{
         map.put(symbol,count);
         return count == dimension;
     }
+
+    @Override
+    public void undoLastMove(int row , int col , char symbol){
+        checkAndRemoveFromRespectiveHashMap(row,symbol,rowHashMapList);
+        checkAndRemoveFromRespectiveHashMap(col,symbol,colHashMapList);
+        if(checkLeftDiagonal(row,col)){
+            removeFromDiagonal(symbol,leftDiagonal);
+        }
+        if(checkRightDiagonal(row,col)){
+            removeFromDiagonal(symbol,rightDiagonal);
+        }
+    }
+
+    private void checkAndRemoveFromRespectiveHashMap(int idx,char symbol,List<HashMap<Character,Integer>> mapList){
+        HashMap<Character,Integer> map = mapList.get(idx);
+        int count = map.get(symbol);
+        map.put(symbol,count-1);
+    }
+
+    private void removeFromDiagonal(char symbol,HashMap<Character,Integer> map){
+        int count = map.get(symbol);
+        map.put(symbol,count-1);
+    }
 }
