@@ -62,8 +62,14 @@ public class TicTacToe {
                     String undoAns = sc.next();
                     if (undoAns.equalsIgnoreCase("Y")) {
                         gameController.undoMove(game, movePlayed);
-                        playerIndex--;
+                        if(playerIndex == 0){
+                            playerIndex = players.size()-1;
+                        }else{
+                            playerIndex--;
+                        }
                         numberOfMoves--;
+                        System.out.println("Undo for the previous move successful");
+                        gameController.displayBoard(game);
                     }
                 }
             }
