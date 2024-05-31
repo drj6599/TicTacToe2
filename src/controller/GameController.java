@@ -20,9 +20,19 @@ public class GameController {
         game.getBoardStates().add(game.getCurrentBoard().clone());
     }
 
+    public void saveMoves(Game game,Move move){
+        game.getMoves().add(move);
+    }
+
     public void displayGameReplay(Game game){
         List<Board> boards = game.getBoardStates();
-        for(Board board : boards){
+        List<Move> moves = game.getMoves();
+        for (int i = 0; i < boards.size(); i++) {
+            Move move = moves.get(i);
+            Board board = boards.get(i);
+            int row = move.getCell().getRow();
+            int col = move.getCell().getCol();
+            System.out.println(move.getPlayer().getName() + "'s Move " + row + "," + col);
             board.displayBoard();
             System.out.println();
         }
@@ -65,9 +75,5 @@ public class GameController {
 
     public Board undoMove(Game game , Move lastMovePlayed) {
         return null;
-    }
-
-    public void replayGame(Game game) {
-
     }
 }

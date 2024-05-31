@@ -44,6 +44,7 @@ public class TicTacToe {
                 Move movePlayed = gameController.executeMove(game, players.get(playerIndex));
                 Player winner = gameController.checkWinner(game, movePlayed);
                 gameController.saveBoardState(game);
+                gameController.saveMoves(game,movePlayed);
                 if (winner != null) {
                     game.setGameStatus(GameStatus.FINISHED);
                     System.out.println("Winner is : " + winner.getName());
@@ -52,6 +53,13 @@ public class TicTacToe {
                 if(gameController.checkDraw(game)){
                     break;
                 }
+//                System.out.println(players.get(playerIndex) + " do you wish to undo your previous move ? Y or N");
+//                String undoAns = sc.next();
+//                if (undoAns.equalsIgnoreCase("Y"))
+//                {
+//                    gameController.undoMove(game,movePlayed);
+//                    playerIndex--;
+//                }
             }
             System.out.println("Final Board Status : ");
             gameController.displayBoard(game);
