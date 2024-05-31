@@ -36,9 +36,9 @@ public class TicTacToe {
             Collections.shuffle(players);
             Game game = gameController.createGame(dimension, players, WinningStrategyName.ORDER_ONE);
             int playerIndex = -1;
+            System.out.println("Current board status");
+            gameController.displayBoard(game);
             while (game.getGameStatus().equals(GameStatus.IN_PROGRESS)) {
-                System.out.println("Current board status");
-                gameController.displayBoard(game);
                 playerIndex++;
                 playerIndex = playerIndex % players.size();
                 System.out.println("It's " + players.get(playerIndex).getName() +"'s turn");
@@ -46,6 +46,8 @@ public class TicTacToe {
                 Player winner = gameController.checkWinner(game, movePlayed);
                 gameController.saveBoardState(game);
                 gameController.saveMoves(game,movePlayed);
+                System.out.println("Current board status");
+                gameController.displayBoard(game);
                 if (winner != null) {
                     game.setGameStatus(GameStatus.FINISHED);
                     System.out.println("Winner is : " + winner.getName());
