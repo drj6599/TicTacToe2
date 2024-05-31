@@ -35,6 +35,11 @@ public class GameController {
             System.out.println(move.getPlayer().getName() + "'s Move " + row + "," + col);
             board.displayBoard();
             System.out.println();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     public void displayBoard(Game game) {
